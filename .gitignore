@@ -5,3 +5,4 @@
 **/.ok_storage.*
 **/tests
 **/__pycache__
+**/construct_check.py
