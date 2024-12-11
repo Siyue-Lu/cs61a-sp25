@@ -138,5 +138,7 @@ def double_eights(n):
     #     else:
     #         n = n // 100
     # return False
-
-    return str(n).find("88") != -1
+    
+    # return str(n).find("88") != -1
+    
+    return "88" in str(n) # in can be used to check sequence, and string is essentially a sequence
