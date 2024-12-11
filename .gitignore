@@ -4,5 +4,6 @@
 **/.ok_history
 **/.ok_storage.*
 **/tests
+**/test.py
 **/__pycache__
 **/construct_check.py
