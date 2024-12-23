@@ -1,8 +1,6 @@
 
 **/ok
-**/*.ok
-**/.ok_history
-**/.ok_storage.*
+**/*.ok*
 **/tests
 **/test.py
 **/__pycache__
