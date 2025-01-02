@@ -166,7 +166,7 @@ def always_roll(n):
     3
     """
     assert n >= 0 and n <= 10
-    return lambda what, ever : n
+    return lambda *_: n
 
 
 def catch_up(score, opponent_score):
@@ -214,9 +214,7 @@ def make_averaged(original_function, times_called=1000):
     >>> averaged_dice(1, dice)  # The avg of 10 4's, 10 2's, 10 5's, and 10 1's
     3.0
     """
-    def helper(*args):
-        return sum(original_function(*args) for _ in range(times_called)) / times_called
-    return helper
+    return lambda *args: sum(original_function(*args) for _ in range(times_called)) / times_called
 
 
 def max_scoring_num_rolls(dice=six_sided, times_called=1000):
