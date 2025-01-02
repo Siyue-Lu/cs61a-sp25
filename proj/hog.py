@@ -166,7 +166,7 @@ def always_roll(n):
     3
     """
     assert n >= 0 and n <= 10
-    return lambda *_: n
+    return lambda *_, **__: n # *: positional arguments, **: keyword arguments
 
 
 def catch_up(score, opponent_score):
