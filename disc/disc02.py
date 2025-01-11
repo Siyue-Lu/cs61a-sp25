@@ -20,7 +20,7 @@ def make_keeper(n):
             if cond(i):
                 print(i)
     return helper
-    # return lambda cond: [print(i) for i in range(1, n + 1) if cond(i)]
+    # return lambda cond: [print(i) for i in range(1, n + 1) if cond(i)] # print() returns None
 
 
 def find_digit(k):
