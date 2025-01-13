@@ -115,7 +115,7 @@ def sevens(n, k):
         if i == n:
             return who
         if has_seven(i):
-            return f(i + 1, (who - direction) % (k + 1), -direction) # switch direction, direction to calculate next who is the value before switching
+            return f(i + 1, (who - direction) % (k + 1), -direction) # direction as the coefficient of who in next round is the before value, new direction is switched at the end
         else:
             return f(i + 1, (who + direction) % (k + 1), direction)
     return f(1, 1, 1)
@@ -134,7 +134,7 @@ def main():
       move()
       if front_is_clear():
          move()
-   # recursion should stop when hitting the wall, the previous move() would change front_is_clear
+   # if front_is_clear() is False during previous move(), going into main() would cause skipping moving forwards but one more step moving backwards
    if front_is_clear():
       main()
    if front_is_blocked():
