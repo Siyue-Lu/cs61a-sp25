@@ -12,10 +12,7 @@ def a_plus_abs_b(a, b):
     >>> a_plus_abs_b(-1, -4)
     3
     """
-    if b < 0:
-        f = sub
-    else:
-        f = add
+    f = sub if b < 0 else add
     return f(a, b)
 
 def a_plus_abs_b_syntax_check():
@@ -66,10 +63,10 @@ def largest_factor(n):
     >>> largest_factor(13) # factor is 1 since 13 is prime
     1
     """
+    factor = n // 2 # math.sqrt(n) is more accurate upper bound than n // 2
     if n % 2 == 0:
-        return n // 2  # // is integer division
+        return factor
     else:
-        factor = n - 1
         while factor > 0:
             if n % factor == 0:
                 return factor

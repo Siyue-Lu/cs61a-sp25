@@ -67,8 +67,7 @@ def simple_update(num_rolls, player_score, opponent_score, dice=six_sided):
     """Return the total score of a player who starts their turn with
     PLAYER_SCORE and then rolls NUM_ROLLS DICE, ignoring Sus Fuss.
     """
-    score = player_score + take_turn(num_rolls, player_score, opponent_score, dice)
-    return score
+    return player_score + take_turn(num_rolls, player_score, opponent_score, dice)
 
 def is_prime(n):
     """Return whether N is prime."""
@@ -83,11 +82,12 @@ def is_prime(n):
 
 def num_factors(n):
     """Return the number of factors of N, including 1 and N itself."""
-    count = 0
-    for i in range(1, n + 1):
-        if n % i == 0:
-            count += 1
-    return count
+    # count = 0
+    # for i in range(1, n + 1):
+    #     if n % i == 0:
+    #         count += 1
+    # return count
+    return sum(1 for i in range(1, n + 1) if n % i == 0)
 
 def sus_points(score):
     """Return the new score of a player taking into account the Sus Fuss rule."""
@@ -100,8 +100,7 @@ def sus_update(num_rolls, player_score, opponent_score, dice=six_sided):
     """Return the total score of a player who starts their turn with
     PLAYER_SCORE and then rolls NUM_ROLLS DICE, *including* Sus Fuss.
     """
-    score = simple_update(num_rolls, player_score, opponent_score, dice)
-    return sus_points(score)
+    return sus_points(simple_update(num_rolls, player_score, opponent_score, dice))
 
 
 def always_roll_5(score, opponent_score):

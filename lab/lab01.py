@@ -99,7 +99,7 @@ def sum_digits(y):
     sum = 0
     while y > 0:
         sum += y % 10
-        y = y // 10
+        y //= 10
     return sum
 
 
@@ -134,9 +134,9 @@ def double_eights(n):
     #     if mod == 88:
     #         return True
     #     elif mod >= 80 and mod <= 89:
-    #         n = n // 10
+    #         n //= 10
     #     else:
-    #         n = n // 100
+    #         n //= 100
     # return False
     
     # return str(n).find("88") != -1

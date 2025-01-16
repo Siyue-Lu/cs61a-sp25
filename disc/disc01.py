@@ -37,7 +37,7 @@ def unique_digits(n):
     """
     arr = [False] * 10
     while n > 0:
-        arr[n % 10] = True
+        arr[n % 10] = True # if not has_digit(n, n % 10)
         n //= 10
     return sum(arr) # sum coverts bool to int
 
