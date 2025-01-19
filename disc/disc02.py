@@ -64,10 +64,11 @@ def match_k(k):
     False
     """
     def helper(x):
-        base = x % (10**k)
-        while x // (10**k) > 0:
-            x //= 10**k
-            cur = x % (10**k)
+        step = 10**k
+        base = x % step
+        while x // step > 0:
+            x //= step
+            cur = x % step
             if cur != base:
                 return False
         return True

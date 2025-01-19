@@ -8,7 +8,7 @@ def digit(n, k):
     >>> digit(3579, 10)
     0
     """
-    return n // pow(10, k) % 10
+    return n // 10**k % 10
 
 
 def middle(a, b, c):
@@ -42,10 +42,10 @@ def falling(n, k):
     >>> falling(4, 0)
     1
     """
-    factorial = 1
+    sum = 1
     for i in range(n, n - k, -1):
-        factorial *= i
-    return factorial
+        sum *= i
+    return sum
 
 
 def divisible_by_k(n, k):
@@ -121,22 +121,19 @@ def double_eights(n):
     # if n < 10:
     #     return False
     # else:
-    #     mod = n % 100
-    #     if mod == 88:
+    #     rem = n % 100
+    #     if rem == 88:
     #         return True
-    #     elif mod >= 80 and mod <= 89:
+    #     elif rem >= 80 and rem <= 89:
     #         return double_eights(n // 10)
     #     else:
     #         return double_eights(n // 100)
 
     # while n > 10:
-    #     mod = n % 100
-    #     if mod == 88:
+    #     rem = n % 100
+    #     if rem == 88:
     #         return True
-    #     elif mod >= 80 and mod <= 89:
-    #         n //= 10
-    #     else:
-    #         n //= 100
+    #     n = n // 10 if rem >= 80 and rem <= 89 else n // 100
     # return False
     
     # return str(n).find("88") != -1

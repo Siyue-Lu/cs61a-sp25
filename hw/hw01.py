@@ -70,8 +70,7 @@ def largest_factor(n):
         while factor > 0:
             if n % factor == 0:
                 return factor
-            else:
-                factor -= 1
+            factor -= 1
 
 
 def hailstone(n):
@@ -97,9 +96,6 @@ def hailstone(n):
     while n != 1:
         print(n)
         length += 1
-        if n % 2 == 0:
-            n //= 2
-        else:
-            n = n * 3 + 1
+        n = n // 2 if n % 2 == 0 else n * 3 + 1
     print(n)
     return length

@@ -107,13 +107,16 @@ def cycle(f1, f2, f3):
     >>> do_two_cycles(1)
     19
     """
+    # def higher_helper(times):
+    #     def helper(x):
+    #         for i in range(times):
+    #             x = (f1, f2, f3)[i % 3](x)  # Directly use tuple indexing to apply functions
+    #         return x
+    #     return helper if times != 0 else lambda x: x
+    # return higher_helper
+    
     def higher_helper(times):
         def helper(x):
-            for i in range(times):
-                x = (f1, f2, f3)[i % 3](x)  # Directly use tuple indexing to apply functions
-            return x
-
+            return cycle(f2, f3, f1)(times - 1)(f1(x)) # in next call: f2 is new f1 etc, shifting through functions; f1 applied on x to be new x
         return helper if times != 0 else lambda x: x
-
     return higher_helper
-
