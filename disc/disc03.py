@@ -47,7 +47,7 @@ def is_prime(n):
             return True
         if n % divisor == 0 or n % (divisor + 2) == 0:
             return False
-        return helper(divisor + 6) # Skip even numbers and multiples of 3
+        return helper(divisor + 6) # Skip multiples of 2 and 3
 
     # Handle edge cases
     if n <= 1:
@@ -55,7 +55,7 @@ def is_prime(n):
     if n <= 3:
         return True  # 2 and 3 are prime numbers
 
-    # Eliminate even numbers and multiples of 3 quickly
+    # Eliminate 0, 1, multiples of 2 and 3
     if n % 2 == 0 or n % 3 == 0:
         return False
     
@@ -90,9 +90,7 @@ def even(n):
     return 1 + hailstone(n // 2)
 
 def odd(n):
-    if n == 1:
-        return 1
-    return 1 + hailstone(n * 3 + 1)
+    return 1 if n == 1 else 1 + hailstone(n * 3 + 1)
 
 
 def sevens(n, k):
@@ -114,10 +112,9 @@ def sevens(n, k):
     def f(i, who, direction):
         if i == n:
             return who
-        if has_seven(i):
-            return f(i + 1, (who - direction) % (k + 1), -direction) # direction as the coefficient of who in next round is the before value, new direction is switched at the end
-        else:
-            return f(i + 1, (who + direction) % (k + 1), direction)
+        # for sevens direction as the coefficient of who is the before value, new direction to be switched at the end
+        return f(i + 1, (who - direction) % (k + 1), -direction) if has_seven(i) else f(i + 1, (who + direction) % (k + 1), direction)
+
     return f(1, 1, 1)
 
 def has_seven(n):
