@@ -105,8 +105,8 @@ def make_repeater(f, n):
     >>> make_repeater(square, 3)(5) # square(square(square(5)))
     390625
     """
-    def g(x):
+    def repeater(x):
         for _ in range(n):
             x = f(x)
         return x
-    return g
+    return repeater
