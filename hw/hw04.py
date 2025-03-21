@@ -146,6 +146,7 @@ def berry_finder(t):
     if label(t) == "berry":
         return True
     return any(berry_finder(b) for b in branches(t))
+    # return True in [berry_finder(b) for b in branches(t)]
 
 
 HW_SOURCE_FILE=__file__
