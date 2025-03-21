@@ -15,11 +15,11 @@ def make_keeper(n):
     5
     >>> make_keeper(5)(lambda x: False)  # Nothing is printed
     """
-    def helper(cond):
+    def keeper(cond):
         for i in range(1, n + 1):
             if cond(i):
                 print(i)
-    return helper
+    return keeper
     # return lambda cond: [print(i) for i in range(1, n + 1) if cond(i)] # print() returns None
 
 
@@ -36,12 +36,12 @@ def find_digit(k):
     0
     """
     assert k > 0
-    # def helper(x):
+    # def finder(x):
     #     string = str(x)
     #     if k > len(string):
     #         return 0
     #     return int(string[-k])
-    # return helper
+    # return finder
     return lambda x: x // (10 ** (k - 1)) % 10
 
 
