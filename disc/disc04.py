@@ -30,6 +30,7 @@ def max_product(s):
     if len(s) == 1:
         return s[0]
     return max(s[0] * max_product(s[2:]), s[1] * max_product(s[3:]))
+    # return max(s[0] * max_product(s[2:]), max_product(s[1:]))
 
 def sums(n, m):
     """Return lists that sum to n containing positive numbers up to m that
@@ -54,7 +55,7 @@ def sums(n, m):
     result = []
     for k in range(1, m + 1):
         if n < k:
-            continue
+            continue # should not break loop as next n could be n - k, n not always < k
         # {step result of previous loop when k = current k - 1} + [[{current k}] + {loop result of all k when n = n - k}]
-        result = result + [[k] + rest for rest in sums(n - k, m) if rest == [] or rest[0] != k]
+        result += [[k] + rest for rest in sums(n - k, m) if rest == [] or rest[0] != k]
     return result
