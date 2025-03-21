@@ -46,6 +46,12 @@ def digit_distance(n):
     ...       ['For', 'While'])
     True
     """
+    # def helper(prev, rest, dist):
+    #     if rest == 0:
+    #         return dist
+    #     return helper(rest % 10, rest // 10, dist + abs(prev - rest % 10))
+    
+    # return helper(n % 10, n // 10, 0)
     return 0 if n < 10 else abs((n % 10) - (n % 100 // 10)) + digit_distance(n // 10)
 
 
@@ -74,6 +80,17 @@ def interleaved_sum(n, odd_func, even_func):
     #     return 0
     # f = even_func if (n // 2) * 2 == n else odd_func  # workaround for %
     # return f(n) + interleaved_sum(n - 1, odd_func, even_func)
+    
+    
+    # def sum_from(k):
+    #     if k > n:
+    #         return 0
+    #     elif k == n:
+    #         return odd_func(k)
+    #     else:
+    #         return odd_func(k) + even_func(k+1) + sum_from(k + 2)
+    # return sum_from(1)
+
     def helper(i, is_odd):
         if i > n:
             return 0
@@ -123,10 +140,8 @@ def count_dollars(total):
             return 0
         
         next_bill = next_smaller_dollar(bill)
-        # if bill is None: # current bill is None
-        #     return 0
         if next_bill is None:
-            return helper(total - bill, bill) # current bill is 1, continue the recursion until total is 0
+            return 1 # current bill is the smallest, no more way to make change
         if bill > total:
             return helper(total, next_bill)
         return helper(total - bill, bill) + helper(total, next_bill)
@@ -175,8 +190,8 @@ def count_dollars_upward(total):
             return 0
 
         next_bill = next_larger_dollar(bill)
-        if (next_bill is None) or (next_bill > total):
-            return helper(total - bill, bill)
+        if (next_bill is None) or (next_bill > total): # current bill is the largest applicable
+            return 1 if total % bill == 0 else 0
         return helper(total - bill, bill) + helper(total, next_bill)
 
     return helper(total, 1)
@@ -217,9 +232,11 @@ def move_stack(n, start, end):
     if n == 1:
         print_move(start, end)
         return
-    move_stack(n - 1, start, 6 - start - end) # rod can only be 1, 2, or 3, (6 - start - end) is the rod that's not start or end
+    # rod can only be 1, 2, or 3, (6 - start - end) is the rod that's not start or end
+    other = 6 - start - end
+    move_stack(n - 1, start, other)
     print_move(start, end)
-    move_stack(n - 1, 6 - start - end, end)
+    move_stack(n - 1, other, end)
 
 
 from operator import sub, mul
