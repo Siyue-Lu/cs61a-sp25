@@ -37,6 +37,7 @@ def partition_gen(n, m):
     3 + 3
     """
     assert n > 0 and m > 0
+    # yield is for a single value, yield from is for all values in an iterable
     if n == m:
         yield f"{m}"
     if n - m > 0:
