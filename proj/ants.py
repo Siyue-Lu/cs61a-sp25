@@ -448,7 +448,7 @@ class SlowThrower(ThrowerAnt):
                 target.slow_cooldown = 0
                 target.orig_action = target.action
                 target.action = lambda gamestate: slowed_action(target, gamestate)
-            target.slow_cooldown = self.slow_cooldown
+            target.slow_cooldown = SlowThrower.slow_cooldown
 
 
 class ScaryThrower(ThrowerAnt):
@@ -460,7 +460,7 @@ class ScaryThrower(ThrowerAnt):
     implemented = True
 
     def throw_at(self, target):
-        target.scare(self.scare_cooldown)
+        target.scare(ScaryThrower.scare_cooldown)
 
 
 class NinjaAnt(Ant):
