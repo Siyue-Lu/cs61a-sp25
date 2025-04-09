@@ -65,10 +65,10 @@ def squares(s):
     >>> squares(seq)
     []
     """
-    return [int(sqrt(n)) for n in s if sqrt(n).is_integer()]
     # return [n // int(n ** 0.5) for n in s if (n // int(n ** 0.5)) == int(n ** 0.5)]
     # return [isqrt(n) for n in s if isqrt(n) ** 2 == n]
     # return [round(n ** 0.5) for n in s if n == round(n ** 0.5) ** 2]
+    return [int(sqrt(n)) for n in s if sqrt(n).is_integer()]
 
 
 def double_eights(n):

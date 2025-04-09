@@ -258,6 +258,8 @@ def make_anonymous_factorial():
     
     # return lambda n: n * (1 if n - 1 <= 1 else n * f(n - 1))
 
-    return (lambda f: lambda n: 1 if n <= 1 else n * f(f)(n - 1))(
-        lambda f: lambda n: 1 if n <= 1 else n * f(f)(n - 1)
-    ) # = f(f)
+    # return (lambda f: lambda n: 1 if n <= 1 else n * f(f)(n - 1))(
+    #     lambda f: lambda n: 1 if n <= 1 else n * f(f)(n - 1)
+    # ) # = f(f)
+    
+    return (lambda f: f(f))(lambda f: lambda n: 1 if n <= 1 else n * f(f)(n - 1))

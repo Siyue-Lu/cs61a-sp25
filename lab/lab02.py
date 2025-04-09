@@ -115,8 +115,10 @@ def cycle(f1, f2, f3):
     #     return helper if times != 0 else lambda x: x
     # return higher_helper
     
-    def higher_helper(times):
-        def helper(x):
-            return cycle(f2, f3, f1)(times - 1)(f1(x)) # in next call: f2 is new f1 etc, shifting through functions; f1 applied on x to be new x
-        return helper if times != 0 else lambda x: x
-    return higher_helper
+    # def higher_helper(times):
+    #     def helper(x):
+    #         return cycle(f2, f3, f1)(times - 1)(f1(x)) # in next call: f2 is new f1 etc, shifting through functions; f1 applied on x to be new x
+    #     return helper if times != 0 else lambda x: x
+    # return higher_helper
+    
+    return lambda n: (lambda x: cycle(f2, f3, f1)(n - 1)(f1(x))) if n != 0 else lambda x: x

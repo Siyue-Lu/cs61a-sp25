@@ -303,7 +303,7 @@ class ContainerAnt(Ant):
         self.ant_contained = None
 
     def can_contain(self, other):
-        return True if self.ant_contained is None and not other.is_container else False
+        return self.ant_contained is None and not other.is_container
 
     def store_ant(self, ant):
         self.ant_contained = ant

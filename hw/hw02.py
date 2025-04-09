@@ -31,11 +31,14 @@ def product(n, term):
     >>> product(3, triple)    # 1*3 * 2*3 * 3*3
     162
     """
-    sum = 1
-    for i in range(1, n + 1):
-        sum *= term(i)
-    return sum
-        
+    # sum = 1
+    # for i in range(1, n + 1):
+    #     sum *= term(i)
+    # return sum
+
+    if n == 0:
+        return 1
+    return product(n - 1, term) * term(n)
 
 
 def accumulate(fuse, start, n, term):
@@ -57,10 +60,15 @@ def accumulate(fuse, start, n, term):
     >>> accumulate(lambda x, y: x + y + 1, 2, 3, square)
     19
     """
-    sum = start
-    for i in range(1, n + 1):
-        sum = fuse(sum, term(i))
-    return sum
+    # sum = start
+    # for i in range(1, n + 1):
+    #     sum = fuse(sum, term(i))
+    # return sum
+
+    if n == 0:
+        return start
+    return fuse(accumulate(fuse, start, n - 1, term), term(n))
+
 
 def summation_using_accumulate(n, term):
     """Returns the sum: term(1) + ... + term(n), using accumulate.
@@ -105,8 +113,10 @@ def make_repeater(f, n):
     >>> make_repeater(square, 3)(5) # square(square(square(5)))
     390625
     """
-    def repeater(x):
-        for _ in range(n):
-            x = f(x)
-        return x
-    return repeater
+    # def repeater(x):
+    #     for _ in range(n):
+    #         x = f(x)
+    #     return x
+    # return repeater
+    
+    return accumulate(lambda f, g: lambda x: f(g(x)), identity, n, lambda _: f)
