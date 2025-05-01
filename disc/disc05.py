@@ -21,6 +21,7 @@ def has_path(t, p):
     else:
         return any(has_path(b, p[1:]) for b in branches(t))
 
+
 def find_path(t, x):
     """
     >>> t2 = tree(5, [tree(6), tree(7)])

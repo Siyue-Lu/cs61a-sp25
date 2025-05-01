@@ -125,6 +125,7 @@ def has_seven(n):
     else:
         return has_seven(n // 10)
 
+
 from karel.stanfordkarel import *
 def main():
    if front_is_clear():

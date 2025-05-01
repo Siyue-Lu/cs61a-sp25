@@ -25,6 +25,7 @@ def is_prime(n):
         i += 6  # Skip even numbers and multiples of 3
     return True
 
+
 def unique_digits(n):
     """Return the number of unique digits in positive integer n.
 
@@ -66,6 +67,7 @@ def has_digit(n, k):
             return True
         n //= 10
     return False
+
 
 def repeating(t, n):
     """Return whether t digits repeat to form positive integer n.

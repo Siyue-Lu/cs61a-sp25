@@ -9,6 +9,7 @@ def draw(hand, positions):
     """
     return list(reversed([hand.pop(i) for i in reversed(sorted(positions))]))
 
+
 LOWERCASE_LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 
 class CapsLock:
@@ -47,6 +48,7 @@ class Button:
         self.output(self.letter if self.caps_lock.pressed % 2 == 0 else self.letter.upper())
         return self
 
+
 class Keyboard:
     """A keyboard.
 
@@ -75,6 +77,7 @@ class Keyboard:
         for w in word:
             self.keys[w].press()
 
+
 class Eye:
     """An eye.
 
@@ -83,7 +86,6 @@ class Eye:
     >>> print(Eye(False).draw(), Eye(True).draw())
     0 -
     """
-
     def __init__(self, closed=False):
         self.closed = closed
 
@@ -93,14 +95,12 @@ class Eye:
         else:
             return "0"
 
-
 class Bear:
     """A bear.
 
     >>> Bear().print()
     ? 0o0?
     """
-
     def __init__(self):
         self.nose_and_mouth = "o"
 
@@ -118,10 +118,8 @@ class SleepyBear(Bear):
     >>> SleepyBear().print()
     ? -o-?
     """
-
     def next_eye(self):
         return Eye(closed=True)
-
 
 class WinkingBear(Bear):
     """A bear whose left eye is different from its right eye.
@@ -129,7 +127,6 @@ class WinkingBear(Bear):
     >>> WinkingBear().print()
     ? -o0?
     """
-
     def __init__(self):
         # self.closed = False
         super().__init__()

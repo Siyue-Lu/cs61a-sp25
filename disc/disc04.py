@@ -15,6 +15,7 @@ def paths(m, n):
         return 1
     return paths(m - 1, n) + paths(m, n - 1)
 
+
 def max_product(s):
     """Return the maximum product of non-consecutive elements of s.
 
@@ -31,6 +32,7 @@ def max_product(s):
         return s[0]
     return max(s[0] * max_product(s[2:]), s[1] * max_product(s[3:]))
     # return max(s[0] * max_product(s[2:]), max_product(s[1:]))
+
 
 def sums(n, m):
     """Return lists that sum to n containing positive numbers up to m that
