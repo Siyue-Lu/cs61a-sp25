@@ -86,17 +86,27 @@ def overlap(s, t):
     # return cnt
     
     # INCREASING s and t, two pointers, doesn't require extra set or list space
-    cnt = 0
-    while s is not Link.empty and t is not Link.empty:
-        if s.first < t.first:
-            s = s.rest
-        elif s.first > t.first:
-            t = t.rest
-        else:
-            cnt += 1
-            s = s.rest
-            t = t.rest
-    return cnt
+    # cnt = 0
+    # while s is not Link.empty and t is not Link.empty:
+    #     if s.first < t.first:
+    #         s = s.rest
+    #     elif s.first > t.first:
+    #         t = t.rest
+    #     else:
+    #         cnt += 1
+    #         s = s.rest
+    #         t = t.rest
+    # return cnt
+    
+    # recursive two pointers
+    if s is Link.empty or t is Link.empty:
+        return 0
+    elif s.first < t.first:
+        return overlap(s.rest, t)
+    elif s.first > t.first:
+        return overlap(s, t.rest)
+    else:
+        return 1 + overlap(s.rest, t.rest)
 
 
 def display(s, k=10):
