@@ -119,4 +119,4 @@ def make_repeater(f, n):
     #     return x
     # return repeater
     
-    return accumulate(lambda f, g: lambda x: f(g(x)), identity, n, lambda _: f)
+    return accumulate(lambda f, g: lambda x: f(g(x)), identity, n, lambda: f) # lambda can be zero-argument
