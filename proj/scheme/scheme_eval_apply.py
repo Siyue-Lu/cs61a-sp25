@@ -115,12 +115,15 @@ def optimize_tail_calls(unoptimized_scheme_eval):
         return an Unevaluated containing an expression for further evaluation.
         """
         if tail and not scheme_symbolp(expr) and not self_evaluating(expr):
+            # setting tail to True on non tail expression would get Unevaluated
+            # instead of executing the expression
             return Unevaluated(expr, env)
         
         # any none tail call is an Unevaluated
         result = Unevaluated(expr, env)
         while isinstance(result, Unevaluated):
-            # result gets replaced with new Unevaluated until there is actual value
+            # has to be last, result of previous frame gets replaced with new Unevaluated
+            # and ignore the rest of previous frame until there is actual value
             result = unoptimized_scheme_eval(result.expr, result.env)
         return result
     return optimized_eval
