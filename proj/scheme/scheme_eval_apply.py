@@ -81,7 +81,8 @@ def eval_all(expressions, env):
     """
     last = None
     while expressions is not nil:
-        last = scheme_eval(expressions.first, env)
+        is_last = expressions.rest is nil
+        last = scheme_eval(expressions.first, env, is_last)
         expressions = expressions.rest
     return last
 
@@ -115,11 +116,13 @@ def optimize_tail_calls(unoptimized_scheme_eval):
         """
         if tail and not scheme_symbolp(expr) and not self_evaluating(expr):
             return Unevaluated(expr, env)
-
+        
+        # any none tail call is an Unevaluated
         result = Unevaluated(expr, env)
-        # BEGIN OPTIONAL PROBLEM 1
-        "*** YOUR CODE HERE ***"
-        # END OPTIONAL PROBLEM 1
+        while isinstance(result, Unevaluated):
+            # result gets replaced with new Unevaluated until there is actual value
+            result = unoptimized_scheme_eval(result.expr, result.env)
+        return result
     return optimized_eval
 
 
@@ -139,4 +142,4 @@ def optimize_tail_calls(unoptimized_scheme_eval):
 # Uncomment the following line to apply tail call optimization #
 ################################################################
 
-# scheme_eval = optimize_tail_calls(scheme_eval)
+scheme_eval = optimize_tail_calls(scheme_eval)
