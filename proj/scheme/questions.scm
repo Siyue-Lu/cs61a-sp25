@@ -40,38 +40,39 @@
 ;; Converts all let special forms in EXPR into equivalent forms using lambda
 (define (let-to-lambda expr)
   (cond ((atom? expr)
-         ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
-         ; END OPTIONAL PROBLEM 2
+         expr
          )
         ((quoted? expr)
-         ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
-         ; END OPTIONAL PROBLEM 2
+          expr
          )
         ((or (lambda? expr)
              (define? expr))
          (let ((form   (car expr))
                (params (cadr expr))
                (body   (cddr expr)))
-           ; BEGIN OPTIONAL PROBLEM 2
-           'replace-this-line
-           ; END OPTIONAL PROBLEM 2
+               (cons form (cons params (map let-to-lambda body)))
            ))
         ((let? expr)
          (let ((values (cadr expr))
                (body   (cddr expr)))
-           ; BEGIN OPTIONAL PROBLEM 2
-           'replace-this-line
-           ; END OPTIONAL PROBLEM 2
+               (let ((zips (zip values)))
+                    ; ((lambda form body) args)
+                    (cons
+                      (cons 'lambda
+                            (cons (car zips)  ; form
+                                  (map let-to-lambda body)))  ; body
+                      (map let-to-lambda (cadr zips))))  ; args
            ))
         (else
-         ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
-         ; END OPTIONAL PROBLEM 2
+          (cons (car expr) (map let-to-lambda (cdr expr)))
          )))
 
 ; Some utility functions that you may find useful to implement for let-to-lambda
 
 (define (zip pairs)
-  'replace-this-line)
+  (if (null? pairs)
+      '(() ())
+      (if (null? (car pairs))
+          '()  ; ←─────────────────────────────────────────────┐
+          (cons (map car pairs)  ;       ┃ |x1...xy| ┃ ↧ ┃     │
+                (zip (map cdr pairs))))))  ; (zip (()1...()y)) ┘
