@@ -23,7 +23,7 @@
     )
 
 (define with-quote
-        '(  ; escaping everything comes after
+        '(  ; quoting the whole chunk in brackets
             (a b)
             c
             d
