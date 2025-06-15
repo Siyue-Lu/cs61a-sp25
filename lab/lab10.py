@@ -26,11 +26,10 @@ def calc_eval(exp):
         return OPERATORS[exp]
     elif isinstance(exp, int) or isinstance(exp, bool):   # Numbers and booleans
         return exp
-    elif exp in bindings:
+    elif exp in bindings:   # Looking up variables
         return bindings[exp]
 
 def calc_apply(op, args):
-    print("DEBUG:",op)
     return op(args)
 
 def floor_div(args):
@@ -52,13 +51,16 @@ def floor_div(args):
     >>> calc_eval(Pair("//", Pair(100, Pair(Pair("+", Pair(2, Pair(3, nil))), nil))))
     20
     """
-    res = args.first
-    while args.rest is not nil:
-        args = args.rest
-        if isinstance(args.first, Pair):
-            args.first = calc_eval(args.first)
-        res //= args.first
-    return res
+    result = args.first
+    divisors = args.rest
+    
+    while divisors is not nil:
+        divisor = divisors.first
+        if isinstance(divisor, Pair):
+            divisor = calc_eval(divisor)
+        result //= divisor
+        divisors = divisors.rest
+    return result
 
 scheme_t = True   # Scheme's #t
 scheme_f = False  # Scheme's #f
@@ -80,13 +82,13 @@ def eval_and(expressions):
     >>> calc_eval(Pair("and", nil))
     True
     """
-    res = scheme_t
+    val = scheme_t
     while expressions is not nil:
-        res = calc_eval(expressions.first)
-        if res is scheme_f:
+        val = calc_eval(expressions.first)
+        if val is scheme_f:
             break
         expressions = expressions.rest
-    return res
+    return val
 
 bindings = {}
 
